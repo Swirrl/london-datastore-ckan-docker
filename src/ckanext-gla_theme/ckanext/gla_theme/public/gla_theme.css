@@ -1,0 +1,19 @@
+.gla_theme-banner {
+    color: white;
+    font-family: Arial,FreeSans,sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.gla_theme-banner-background {
+    height: 3.0rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #353d42;
+}
+
+.gla_theme-banner-link {
+    text-decoration: underline;
+    color: #6BCEF2
+}

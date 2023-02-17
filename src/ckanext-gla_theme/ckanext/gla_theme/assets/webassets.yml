@@ -1,0 +1,14 @@
+# gla_theme-js:
+#   filter: rjsmin
+#   output: ckanext-gla_theme/%(version)s-gla_theme.js
+#   contents:
+#     - js/gla_theme.js
+#   extra:
+#     preload:
+#       - base/main
+
+# gla_theme-css:
+#   filter: cssrewrite
+#   output: ckanext-gla_theme/%(version)s-gla_theme.css
+#   contents:
+#     - css/gla_theme.css
