@@ -1,0 +1,38 @@
+name: deploy-ckan
+
+on: workflow_dispatch
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: 'Build image'
+        run: ./build-image.sh
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCLOUD_SERVICE_KEY }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: 'Configure docker'
+        run: |-
+          gcloud auth configure-docker europe-west2-docker.pkg.dev
+
+      - name: 'Check images'
+        run: |-
+          docker images
+        
+      - name: 'Tag image'
+        run: |-
+          docker tag ckan-gla:ckan-2.10 europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:ckan-2.10
+
+      - name: 'Push image'
+        run: |-
+          docker push europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:ckan-2.10
+
