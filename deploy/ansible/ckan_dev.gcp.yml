@@ -1,0 +1,7 @@
+plugin: gcp_compute
+projects:
+  - gla-evaluation-magda
+auth_kind: serviceaccount
+service_account_file: /Users/kjoshi/projects/london-datastore-ckan-docker/deploy/ansible/gla-evaluation-magda-688226bad518.json
+filters:
+  - labels.application=ckan

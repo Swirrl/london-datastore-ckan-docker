@@ -30,9 +30,9 @@ jobs:
         
       - name: 'Tag image'
         run: |-
-          docker tag ckan-gla:ckan-2.10 europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:ckan-2.10
+          docker tag ckan-gla:ckan-2.10 europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
 
       - name: 'Push image'
         run: |-
-          docker push europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:ckan-2.10
+          docker push europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
 
