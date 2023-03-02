@@ -4,4 +4,4 @@ projects:
 auth_kind: serviceaccount
 filters:
   - labels.application=ckan
-#service_account_file: env var: <GCP_SERVICE_ACCOUNT_FILE>
+

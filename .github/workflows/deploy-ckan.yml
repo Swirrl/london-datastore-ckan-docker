@@ -41,15 +41,8 @@ jobs:
           pip install ansible requests google-auth
           ansible-galaxy collection install google.cloud
 
-      - name: 'Check paths'
-        run: |-
-          which python
-          python --version
-          which ansible
-          which ansible-playbook
-
       - name: 'Restart docker container'
         working-directory: deploy/ansible
-        run: |-
-          ls
-          ansible-playbook -i ckan_dev.gcp.yml deploy-ckan.yml
+        env:
+          GCP_SERVICE_ACCOUNT_CONTENTS: '${{ secrets.GCLOUD_SERVICE_KEY }}'
+        run:  ansible-playbook -i ckan_dev.gcp.yml deploy-ckan.yml
