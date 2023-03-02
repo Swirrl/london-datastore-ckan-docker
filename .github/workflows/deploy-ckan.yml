@@ -11,9 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.11.0'
+      #- uses: actions/setup-python@v4
+        #with:
+          #python-version: '3.11.0'
 
       - name: 'Build image'
         run: ./build-image.sh
@@ -36,13 +36,18 @@ jobs:
           docker tag ckan-gla:ckan-2.10 europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
           docker push europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
 
-      - name: 'Install google auth'
-        run: |-
-          pip install ansible requests google-auth
-          ansible-galaxy collection install google.cloud
+      #- name: 'Install google auth'
+        #run: |-
+          #pip install ansible requests google-auth
+          #ansible-galaxy collection install google.cloud
+
+      - name: Decrypt Pem
+        run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secrets/ansible ansible.gpg
+        env:
+          PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: 'Restart docker container'
         working-directory: deploy/ansible
         env:
           GCP_SERVICE_ACCOUNT_CONTENTS: '${{ secrets.GCLOUD_SERVICE_KEY }}'
-        run:  ansible-playbook -i ckan_dev.gcp.yml deploy-ckan.yml
+        run:  ansible-playbook -i ckan_dev.gcp.yml --private-key $HOME/secrets/ansible deploy-ckan.yml
