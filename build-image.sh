@@ -7,10 +7,10 @@ EXTENSIONS_DIR=$BUILD_DIR/extensions
 mkdir -p $EXTENSIONS_DIR
 
 # Copy the CKAN base stuff
-cp -r ckan/* $BUILD_DIR
+cp -R ckan/* $BUILD_DIR
 
 # Copy all extensions from the src/ directory into the EXTENSIONS_DIR
-cp -r src/* $EXTENSIONS_DIR
+cp -R src/* $EXTENSIONS_DIR
 
 # Build the CKAN image
 pushd $BUILD_DIR
