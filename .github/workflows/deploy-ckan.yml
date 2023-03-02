@@ -2,6 +2,9 @@ name: deploy-ckan
 
 on: workflow_dispatch
 
+env:
+  GCP_AUTH_KIND: serviceaccount
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -24,15 +27,11 @@ jobs:
         run: |-
           gcloud auth configure-docker europe-west2-docker.pkg.dev
 
-      - name: 'Check images'
-        run: |-
-          docker images
-        
-      - name: 'Tag image'
+      - name: 'Tag and push image'
         run: |-
           docker tag ckan-gla:ckan-2.10 europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
-
-      - name: 'Push image'
-        run: |-
           docker push europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
 
+      - name: 'Restart docker container'
+        working-directory: deploy/ansible
+        run: ansible-playbook -i ckan_dev.gcp.yml deploy-ckan.yml
