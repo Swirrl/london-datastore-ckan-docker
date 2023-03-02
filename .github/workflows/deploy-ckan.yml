@@ -60,6 +60,7 @@ jobs:
           known_hosts: ${{secrets.KNOWN_HOSTS}}
           options: |
             --inventory ckan_dev.gcp.yml
+            --user kjoshi
             --verbose
 
       #- name: 'Restart docker container'
