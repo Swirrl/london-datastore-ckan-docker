@@ -11,6 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.0'
+
       - name: 'Build image'
         run: ./build-image.sh
 
@@ -33,7 +37,7 @@ jobs:
           docker push europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
 
       - name: 'Install google auth'
-        run: pip install google-auth
+        run: pip3 install google-auth
 
       - name: 'Restart docker container'
         working-directory: deploy/ansible
