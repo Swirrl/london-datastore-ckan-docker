@@ -42,7 +42,7 @@ jobs:
           #ansible-galaxy collection install google.cloud
 
       - name: 'Decrypt Private Key'
-        run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secrets/ansible ansible.gpg
+        run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secrets/ansible-key ansible-key.gpg
         working-directory: deploy/ansible
         env:
           PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
@@ -51,4 +51,4 @@ jobs:
         working-directory: deploy/ansible
         env:
           GCP_SERVICE_ACCOUNT_CONTENTS: '${{ secrets.GCLOUD_SERVICE_KEY }}'
-        run:  ansible-playbook -i ckan_dev.gcp.yml --private-key $HOME/secrets/ansible deploy-ckan.yml
+        run:  ansible-playbook -i ckan_dev.gcp.yml --private-key $HOME/secrets/ansible-key deploy-ckan.yml
