@@ -37,7 +37,14 @@ jobs:
           docker push europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
 
       - name: 'Install google auth'
-        run: pip3 install google-auth
+        run: pip install ansible requests google-auth
+
+      - name: 'Check paths'
+        run: |-
+          which python
+          python --version
+          which ansible
+          which ansible-playbook
 
       - name: 'Restart docker container'
         working-directory: deploy/ansible
