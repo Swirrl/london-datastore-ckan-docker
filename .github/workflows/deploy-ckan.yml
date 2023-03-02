@@ -42,7 +42,9 @@ jobs:
           #ansible-galaxy collection install google.cloud
 
       - name: 'Decrypt Private Key'
-        run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secrets/ansible-key ansible-key.gpg
+        run: |-
+          mkdir -p $HOME/secrets
+          gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secrets/ansible-key ansible-key.gpg
         working-directory: deploy/ansible
         env:
           PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
