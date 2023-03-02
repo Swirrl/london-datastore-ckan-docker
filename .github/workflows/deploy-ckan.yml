@@ -53,4 +53,4 @@ jobs:
         working-directory: deploy/ansible
         env:
           GCP_SERVICE_ACCOUNT_CONTENTS: '${{ secrets.GCLOUD_SERVICE_KEY }}'
-        run:  ansible-playbook -i ckan_dev.gcp.yml --private-key $HOME/secrets/ansible-key deploy-ckan.yml
+        run:  ansible-playbook -i ckan_dev.gcp.yml -u kjoshi --private-key $HOME/secrets/ansible-key deploy-ckan.yml
