@@ -41,8 +41,9 @@ jobs:
           #pip install ansible requests google-auth
           #ansible-galaxy collection install google.cloud
 
-      - name: Decrypt Pem
+      - name: 'Decrypt Private Key'
         run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secrets/ansible ansible.gpg
+        working-directory: deploy/ansible
         env:
           PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
