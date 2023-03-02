@@ -33,7 +33,7 @@ jobs:
           docker push europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
 
       - name: 'Install google auth'
-        run: pip install google-aith
+        run: pip install google-auth
 
       - name: 'Restart docker container'
         working-directory: deploy/ansible
