@@ -32,6 +32,9 @@ jobs:
           docker tag ckan-gla:ckan-2.10 europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
           docker push europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest
 
+      - name: 'Install google auth'
+        run: pip install google-aith
+
       - name: 'Restart docker container'
         working-directory: deploy/ansible
         run: ansible-playbook -i ckan_dev.gcp.yml deploy-ckan.yml
