@@ -1,6 +1,9 @@
 name: deploy-ckan
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      master
 
 env:
   GCP_AUTH_KIND: serviceaccount
@@ -41,14 +44,6 @@ jobs:
           pip install ansible requests google-auth
           ansible-galaxy collection install google.cloud
 
-      #- name: 'Decrypt Private Key'
-        #run: |-
-          #mkdir -p $HOME/secrets
-          #gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secrets/ansible-key ansible-key.gpg
-        #working-directory: deploy/ansible
-        #env:
-          #PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         env:
@@ -62,9 +57,3 @@ jobs:
             --inventory ckan_dev.gcp.yml
             --user ${{ secrets.ANSIBLE_USER }}
             --verbose
-
-      #- name: 'Restart docker container'
-        #working-directory: deploy/ansible
-        #env:
-          #GCP_SERVICE_ACCOUNT_CONTENTS: '${{ secrets.GCLOUD_SERVICE_KEY }}'
-        #run:  ansible-playbook -i ckan_dev.gcp.yml --private-key $HOME/secrets/ansible-key deploy-ckan.yml
