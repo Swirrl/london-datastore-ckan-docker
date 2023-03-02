@@ -57,6 +57,7 @@ jobs:
           playbook: deploy-ckan.yml
           directory: ./deploy/ansible
           key: ${{secrets.ANSIBLE_KEY}}
+          known_hosts: ${{secrets.KNOWN_HOSTS}}
           options: |
             --inventory ckan_dev.gcp.yml
             --verbose
