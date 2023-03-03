@@ -2,6 +2,15 @@
 - name: Restart a container
   hosts: all
   tasks:
+
+  - name: Ensure ssh host key known
+    delegate_to: localhost
+    lineinfile:
+      dest: ~/.ssh/known_hosts
+      create: yes
+      state: present
+      line: "{{ lookup('pipe', 'ssh-keyscan -trsa -p 22' + ' ' + inventory_hostname) }}"
+
   - name: Setup gcloud docker
     ansible.builtin.command: gcloud auth configure-docker europe-west2-docker.pkg.dev
 
