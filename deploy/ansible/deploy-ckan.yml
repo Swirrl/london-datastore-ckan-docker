@@ -13,6 +13,8 @@
 
   - name: Setup gcloud docker
     ansible.builtin.command: gcloud auth configure-docker europe-west2-docker.pkg.dev
+    register: result
+    changed_when: "'gcloud credential helpers already registered correctly' not in result.stderr"
 
   - name: "Redeploy CKAN container"
     community.docker.docker_container:
