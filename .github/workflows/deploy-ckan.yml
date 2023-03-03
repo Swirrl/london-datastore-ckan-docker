@@ -44,6 +44,13 @@ jobs:
           pip install ansible requests google-auth
           ansible-galaxy collection install google.cloud
 
+      - name: Setup Known Hosts
+        delegate_to: localhost
+        known_hosts:
+          key: "{{ lookup('pipe', 'ssh-keyscan -t ed25519 ' + inventory_hostname) }}"
+          name: "{{ inventory_hostname }}"
+          state: present
+
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         env:
@@ -52,7 +59,6 @@ jobs:
           playbook: deploy-ckan.yml
           directory: ./deploy/ansible
           key: ${{secrets.ANSIBLE_KEY}}
-          known_hosts: ${{secrets.KNOWN_HOSTS}}
           options: |
             --inventory ckan_dev.gcp.yml
             --user ${{ secrets.ANSIBLE_USER }}
