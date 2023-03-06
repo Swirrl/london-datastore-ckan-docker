@@ -24,6 +24,8 @@
       state: started
       restart: true
       env_file: /ckan/env
+      env:
+        CKAN_SITE_URL: "http://{{ansible_default_ipv4.address}}:5000"
       ports: 
         - "5000:5000"
 
