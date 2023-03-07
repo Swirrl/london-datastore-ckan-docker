@@ -17,6 +17,7 @@
     changed_when: "'gcloud credential helpers already registered correctly' not in result.stderr"
 
   - name: Copy environment file
+    become: yes
     ansible.builtin.copy:
       src: "{{lookup('ansible.builtin.env', 'GITHUB_WORKSPACE')}}/ckan/.env.local"
       dest: "/ckan/env"
@@ -24,7 +25,7 @@
   - name: "Redeploy CKAN container"
     community.docker.docker_container:
       name: ckan-gla
-      image: 'europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla-base:latest'
+      image: 'europe-west2-docker.pkg.dev/gla-evaluation-magda/swirrl-london-datastore-ckan/ckan-gla:latest'
       pull: true
       state: started
       restart: true
