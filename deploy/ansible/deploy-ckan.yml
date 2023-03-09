@@ -19,7 +19,7 @@
   - name: Copy environment file
     become: yes
     ansible.builtin.copy:
-      src: "{{lookup('ansible.builtin.env', 'GITHUB_WORKSPACE')}}/ckan/.env.local"
+      src: "{{lookup('ansible.builtin.env', 'GITHUB_WORKSPACE')}}/ckan/.env.server"
       dest: "/ckan/env"
 
   - name: "Redeploy CKAN container"
