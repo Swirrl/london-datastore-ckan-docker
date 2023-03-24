@@ -159,7 +159,8 @@ h1,.h1 {
 
 h2,.h2 {
     font-size: 2.5rem;
-    line-height: 2.5rem
+    line-height: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
 @media (min-width: 75em) {
@@ -461,13 +462,10 @@ input#field-sitewide-search::-ms-input-placeholder { /* Microsoft Edge */
 
 .main {
     background: white;
+    padding-bottom: 3rem;
 }
 
 /* Breadcrumbs */
-
-.main {
-    background: white;
-}
 
 
 .breadcrumb .fa-home {
@@ -698,7 +696,9 @@ a .fa {
 }
 
 /* Page layout */
-
+.page-section {
+    margin-bottom: 4rem;
+}
 .page-header .content_action {
     margin-top: -10px;
 }
@@ -796,6 +796,12 @@ header.module-content.page-header {
 
 .site-footer {
     background: var(--t-colors-dark-grey);
+    padding: 3rem 0;
+}
+
+.site-footer h4 {
+    color: white;
+    margin-bottom: 1.25rem;
 }
 
 .site-footer a {
@@ -808,6 +814,9 @@ header.module-content.page-header {
     text-decoration-color: var(--t-colors-pink);
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
+}
+.site-footer .footer-links ul {
+    border-right: 1px solid var(--t-colors-grey);
 }
 
 .site-footer .attribution p {
@@ -824,8 +833,48 @@ form.lang-select * {
     font-size: 1rem!important;
 }
 
+form.lang-select select {
+    appearance: none;
+}
+
 .select2-drop * {
     font-size: 1rem;
+}
+
+/* Hero */
+
+.hero {
+    margin-bottom: 3rem;
+}
+
+.hero {
+    position: relative;
+    max-height: 37.5rem;
+    min-height: 31.25rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    background-size: cover!important;
+    background-position: 50%!important;
+}
+
+.hero:before {
+    content: "";
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(90deg,rgba(0,0,0,.85) 20%,hsla(0,0%,100%,0));
+}
+
+.hero__content {
+    position: relative;
+    width: 50%;
+}
+
+.hero .search-form {
+    border: 0;
+    padding: 0;
 }
 
 /* Homepage */
@@ -974,7 +1023,7 @@ a.tag:hover {
 .phase-banner { 
     font-size: 1rem;
     border-bottom: 1px solid var(--t-colors-grey-50);
-    padding-bottom: 15px;
+    padding: 15px 0;
 }
 
 .phase-banner__content {
@@ -999,3 +1048,35 @@ a.tag:hover {
     line-height: 1.25;
 }
 
+/* Card */
+
+.card {
+    border-radius: 0;
+    border: none;
+}
+
+.card-body {
+    padding: 1rem 0 0;
+}
+
+.card-img, .card-img-top {
+    border-radius: 0;
+}
+
+/* Connected */
+
+.connections {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.connections a {
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.connections img {
+    display: block;
+    width: 100%;
+}
